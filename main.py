@@ -20,7 +20,7 @@ class ExamAttempt:
     }
 
   def validate_grades(self):
-    if self.total_questions >= self.correct_answers:
+    if (self.total_questions >= self.correct_answers) and (self.total_questions > 0):
       return True
     else:
       return False
@@ -57,6 +57,7 @@ class Student:
 student1 = Student("Carlos", "Ingenieria", "UNP")
 student1.add_attempt(7, 8)
 student1.add_attempt(8, 8)
+student1.add_attempt(0, 0)
 student1.add_attempt(12, 10)
 
 print(student1.get_report())
