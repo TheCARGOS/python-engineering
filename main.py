@@ -30,11 +30,24 @@ class Student:
     attempt = ExamAttempt(self.name, "Informatica", correct_answers, total_questions)
     self.attempts.append(attempt)
 
+  def get_report(self):
+    is_passed = False
+    total_score = 0
+    for attempt in self.attempts:
+      total_score += attempt.get_score()
+
+    is_passed = (total_score / len(self.attempts)) >= 11
+
+    return {
+      "student_name": self.name,
+      "is_passed": is_passed,
+      "total_score": total_score
+    }
+
 
 student1 = Student("Carlos", "Ingenieria", "UNP")
 student1.add_attempt(7, 8)
 student1.add_attempt(8, 8)
 student1.add_attempt(12, 10)
-print(student1.attempts[0].get_score())
-print(student1.attempts[1].get_score())
-print(student1.attempts[2].get_score())
+
+print(student1.get_report())
