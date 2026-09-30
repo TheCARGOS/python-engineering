@@ -20,10 +20,7 @@ class ExamAttempt:
     }
 
   def validate_grades(self):
-    if self.total_questions >= self.correct_answers:
-      return True
-    else:
-      return False
+    return self.total_questions >= self.correct_answers
 
 class Student:
   def __init__(self, name, career, institution):
@@ -38,6 +35,14 @@ class Student:
       self.attempts.append(attempt)
     else:
       print("Las notas no son correctas")
+
+  def get_best_attempt(self):
+    best_attempt = None
+
+    for attempt in self.attempts:
+      if best_attempt is None or attempt.get_score() >= best_attempt.get_score():
+        best_attempt = attempt
+    return best_attempt
 
   def get_report(self):
     is_passed = False
@@ -59,4 +64,5 @@ student1.add_attempt(7, 8)
 student1.add_attempt(8, 8)
 student1.add_attempt(12, 10)
 
+print(f"The best attempt is: {student1.get_best_attempt().get_summary()}")
 print(student1.get_report())
