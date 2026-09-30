@@ -19,6 +19,12 @@ class ExamAttempt:
       "passed": self.is_passed()
     }
 
+  def validate_grades(self):
+    if self.total_questions >= self.correct_answers:
+      return True
+    else:
+      return False
+
 class Student:
   def __init__(self, name, career, institution):
     self.name = name
@@ -28,7 +34,10 @@ class Student:
 
   def add_attempt(self, correct_answers, total_questions):
     attempt = ExamAttempt(self.name, "Informatica", correct_answers, total_questions)
-    self.attempts.append(attempt)
+    if attempt.validate_grades():
+      self.attempts.append(attempt)
+    else:
+      print("Las notas no son correctas")
 
   def get_report(self):
     is_passed = False
